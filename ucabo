@@ -121,7 +121,7 @@ do
 {
 	# Do nothing until cmstp is an active window
 }
-until ((Set-WindowActive cmstp).Hwnd -ne 0)
+until ((Set-WindowActive cmstp).Hwnd -ne 0) -and ((Set-WindowActive cmstp).Hwnd -ne "N/A")
 
 
 #Activate window
